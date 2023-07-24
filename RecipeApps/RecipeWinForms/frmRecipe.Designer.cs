@@ -39,12 +39,12 @@
             btnDelete = new Button();
             lblRecipeName = new Label();
             txtRecipeName = new TextBox();
-            txtUserName = new TextBox();
-            txtCuisineType = new TextBox();
             txtCaloriesPerServing = new TextBox();
             txtDateDrafted = new TextBox();
             txtDatePublished = new TextBox();
             txtDateArchived = new TextBox();
+            lstUserName = new ComboBox();
+            lstCuisineType = new ComboBox();
             tblMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,12 +63,12 @@
             tblMain.Controls.Add(btnDelete, 1, 7);
             tblMain.Controls.Add(lblRecipeName, 0, 0);
             tblMain.Controls.Add(txtRecipeName, 1, 0);
-            tblMain.Controls.Add(txtUserName, 1, 1);
-            tblMain.Controls.Add(txtCuisineType, 1, 2);
             tblMain.Controls.Add(txtCaloriesPerServing, 1, 3);
             tblMain.Controls.Add(txtDateDrafted, 1, 4);
             tblMain.Controls.Add(txtDatePublished, 1, 5);
             tblMain.Controls.Add(txtDateArchived, 1, 6);
+            tblMain.Controls.Add(lstUserName, 1, 1);
+            tblMain.Controls.Add(lstCuisineType, 1, 2);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Name = "tblMain";
@@ -196,6 +196,7 @@
             // 
             lblRecipeName.AutoSize = true;
             lblRecipeName.BackColor = Color.PowderBlue;
+            lblRecipeName.BorderStyle = BorderStyle.FixedSingle;
             lblRecipeName.Dock = DockStyle.Fill;
             lblRecipeName.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             lblRecipeName.Location = new Point(3, 0);
@@ -214,26 +215,6 @@
             txtRecipeName.Name = "txtRecipeName";
             txtRecipeName.Size = new Size(301, 47);
             txtRecipeName.TabIndex = 16;
-            // 
-            // txtUserName
-            // 
-            txtUserName.Dock = DockStyle.Fill;
-            txtUserName.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUserName.Location = new Point(309, 56);
-            txtUserName.Multiline = true;
-            txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(301, 47);
-            txtUserName.TabIndex = 17;
-            // 
-            // txtCuisineType
-            // 
-            txtCuisineType.Dock = DockStyle.Fill;
-            txtCuisineType.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCuisineType.Location = new Point(309, 109);
-            txtCuisineType.Multiline = true;
-            txtCuisineType.Name = "txtCuisineType";
-            txtCuisineType.Size = new Size(301, 47);
-            txtCuisineType.TabIndex = 18;
             // 
             // txtCaloriesPerServing
             // 
@@ -275,6 +256,24 @@
             txtDateArchived.Size = new Size(301, 47);
             txtDateArchived.TabIndex = 22;
             // 
+            // lstUserName
+            // 
+            lstUserName.Dock = DockStyle.Fill;
+            lstUserName.FormattingEnabled = true;
+            lstUserName.Location = new Point(309, 56);
+            lstUserName.Name = "lstUserName";
+            lstUserName.Size = new Size(301, 23);
+            lstUserName.TabIndex = 23;
+            // 
+            // lstCuisineType
+            // 
+            lstCuisineType.Dock = DockStyle.Fill;
+            lstCuisineType.FormattingEnabled = true;
+            lstCuisineType.Location = new Point(309, 109);
+            lstCuisineType.Name = "lstCuisineType";
+            lstCuisineType.Size = new Size(301, 23);
+            lstCuisineType.TabIndex = 24;
+            // 
             // frmRecipe
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -301,11 +300,11 @@
         private Button btnDelete;
         private Label lblRecipeName;
         private TextBox txtRecipeName;
-        private TextBox txtUserName;
-        private TextBox txtCuisineType;
         private TextBox txtCaloriesPerServing;
         private TextBox txtDateDrafted;
         private TextBox txtDatePublished;
         private TextBox txtDateArchived;
+        private ComboBox lstUserName;
+        private ComboBox lstCuisineType;
     }
 }
