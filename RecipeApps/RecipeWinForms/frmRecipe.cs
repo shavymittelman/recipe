@@ -1,6 +1,4 @@
-﻿using CPUFramework;
-using CPUWindowsFormFramework;
-using System.Data;
+﻿using System.Data;
 using System.Diagnostics;
 
 namespace RecipeWinForms
@@ -19,14 +17,13 @@ namespace RecipeWinForms
 
         public void ShowForm(int recipeid)
         {
-            string sql = "select * from UserRef u join Recipe r on u.UserRefId = r.UserRefId join Cuisine c on r.CuisineId = c.CuisineId where r.RecipeId = " + recipeid.ToString();
-            dtrecipe = SQLUtility.GetDataTable(sql);
+            dtrecipe = Recipe.Load(recipeid);
             if (recipeid == 0)
             {
                 dtrecipe.Rows.Add();
             }
-            DataTable dtuserref = SQLUtility.GetDataTable("select u.UserRefId, u.UserName from UserRef u");
-            DataTable dtcuisine = SQLUtility.GetDataTable("select c.CuisineId, c.CuisineType from Cuisine c ");
+            DataTable dtuserref = Recipe.GetUserRefList();
+            DataTable dtcuisine = Recipe.GetCuisineList();
             WindowsFormsUtility.SetControlBinding(txtRecipeName, dtrecipe);
             WindowsFormsUtility.SetListBinding(lstUserName, dtuserref, dtrecipe, "UserRef");
             WindowsFormsUtility.SetListBinding(lstCuisineType, dtcuisine, dtrecipe, "Cuisine");
@@ -39,34 +36,12 @@ namespace RecipeWinForms
 
         private void Save()
         {
-            DataRow r = dtrecipe.Rows[0];
-            int id = (int)r["RecipeId"];
-            string sql = "";
-
-            if (id > 0)
-            {
-                sql = string.Join(Environment.NewLine, $"update recipe set",
-                    $"RecipeName = '{r["RecipeName"]}',",
-                    $"UserRefId = '{r["UserRefId"]}',",
-                    $"CuisineId = '{r["CuisineId"]}',",
-                    $"CaloriesPerServing = '{r["CaloriesPerServing"]}',",
-                    $"DateDrafted = '{r["DateDrafted"]}'",
-                    $"where RecipeId = {r["RecipeId"]}");
-            }
-            else
-            {
-                sql = "insert recipe(UserRefId, CuisineId, RecipeName, CaloriesPerServing, DateDrafted) ";
-                sql += $"select '{r["UserRefId"]}', '{r["CuisineId"]}', '{r["RecipeName"]}', {r["CaloriesPerServing"]}, '{r["DateDrafted"]}'";
-            }
-            Debug.Print("------------------------------------");
-            SQLUtility.ExecuteSQL(sql);
+            Recipe.Save(dtrecipe);
         }
 
         private void Delete()
         {
-            int id = (int)dtrecipe.Rows[0]["RecipeId"];
-            string sql = "delete recipe where RecipeId = " + id;
-            SQLUtility.ExecuteSQL(sql);
+            Recipe.Delete(dtrecipe);
             this.Close();
         }
 
