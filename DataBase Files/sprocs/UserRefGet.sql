@@ -1,22 +1,23 @@
-create or alter procedure dbo.UserRefGet(@UserRefId int = 0, @All bit = 0, @UserRefName varchar(100) = '')
+create or alter procedure dbo.UserRefGet(@UserRefId int = 0, @UserName varchar(75) = '', @All bit = 0)
 as 
 begin
-	select @UserRefName = nullif(@UserRefName, '')
-	select r.UserRefId, r.UserRefId, r.CuisineId, r.UserRefName, r.CaloriesPerServing, r.DateDrafted, r.DatePublished, r.DateArchived, r.UserRefStatus, r.UserRefPicture
-	from UserRef r
-	where r.UserRefId = @UserRefId
+	select @UserName = nullif(@UserName, '')
+	select u.UserRefId, u.FirstName, u.LastName, u.UserName
+	from UserRef u
+	where u.UserRefId = @UserRefId	
+	or u.UserName like '%' + @UserName + '%'
 	or @All = 1
-	or r.UserRefName like '%' + @UserRefName + '%'
-	order by r.UserRefId, r.CuisineId, r.UserRefName, r.CaloriesPerServing, r.DateDrafted, r.DatePublished, r.DateArchived, r.UserRefStatus, r.UserRefPicture
+	order by u.FirstName, u.LastName, u.UserName
 end
 go
 
-
-exec UserRefGet @UserRefName = '' --return no results
-exec UserRefGet @UserRefName = 'l' --return results with l
+/*
+exec UserRefGet @UserName = '' --return no results
+exec UserRefGet @UserName = 'l' --return results with l
 
 exec UserRefGet @All = 1
 
 declare @Id int
 select top 1 @Id = r.UserRefId from UserRef r
 exec UserRefGet @UserRefId = @Id
+*/

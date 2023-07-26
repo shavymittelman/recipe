@@ -11,7 +11,7 @@ begin
 end
 go
 
-
+/*
 exec CuisineGet @CuisineType = '' --return no results
 exec CuisineGet @CuisineType = 'l' --return results with l
 
@@ -20,3 +20,4 @@ exec CuisineGet @All = 1
 declare @Id int
 select top 1 @Id = r.CuisineId from Cuisine r
 exec CuisineGet @CuisineId = @Id
+*/
