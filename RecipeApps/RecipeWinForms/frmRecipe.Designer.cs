@@ -41,10 +41,10 @@
             txtRecipeName = new TextBox();
             txtCaloriesPerServing = new TextBox();
             txtDateDrafted = new TextBox();
-            txtDatePublished = new TextBox();
-            txtDateArchived = new TextBox();
             lstUserName = new ComboBox();
             lstCuisineType = new ComboBox();
+            txtDatePublished = new Label();
+            txtDateArchived = new Label();
             tblMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,10 +65,10 @@
             tblMain.Controls.Add(txtRecipeName, 1, 0);
             tblMain.Controls.Add(txtCaloriesPerServing, 1, 3);
             tblMain.Controls.Add(txtDateDrafted, 1, 4);
-            tblMain.Controls.Add(txtDatePublished, 1, 5);
-            tblMain.Controls.Add(txtDateArchived, 1, 6);
             tblMain.Controls.Add(lstUserName, 1, 1);
             tblMain.Controls.Add(lstCuisineType, 1, 2);
+            tblMain.Controls.Add(txtDatePublished, 1, 5);
+            tblMain.Controls.Add(txtDateArchived, 1, 6);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Name = "tblMain";
@@ -236,26 +236,6 @@
             txtDateDrafted.Size = new Size(301, 47);
             txtDateDrafted.TabIndex = 20;
             // 
-            // txtDatePublished
-            // 
-            txtDatePublished.Dock = DockStyle.Fill;
-            txtDatePublished.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDatePublished.Location = new Point(309, 268);
-            txtDatePublished.Multiline = true;
-            txtDatePublished.Name = "txtDatePublished";
-            txtDatePublished.Size = new Size(301, 47);
-            txtDatePublished.TabIndex = 21;
-            // 
-            // txtDateArchived
-            // 
-            txtDateArchived.Dock = DockStyle.Fill;
-            txtDateArchived.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtDateArchived.Location = new Point(309, 321);
-            txtDateArchived.Multiline = true;
-            txtDateArchived.Name = "txtDateArchived";
-            txtDateArchived.Size = new Size(301, 47);
-            txtDateArchived.TabIndex = 22;
-            // 
             // lstUserName
             // 
             lstUserName.Dock = DockStyle.Fill;
@@ -273,6 +253,32 @@
             lstCuisineType.Name = "lstCuisineType";
             lstCuisineType.Size = new Size(301, 23);
             lstCuisineType.TabIndex = 24;
+            // 
+            // txtDatePublished
+            // 
+            txtDatePublished.AutoSize = true;
+            txtDatePublished.BackColor = SystemColors.ButtonHighlight;
+            txtDatePublished.BorderStyle = BorderStyle.Fixed3D;
+            txtDatePublished.Dock = DockStyle.Fill;
+            txtDatePublished.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDatePublished.Location = new Point(309, 265);
+            txtDatePublished.Name = "txtDatePublished";
+            txtDatePublished.Size = new Size(301, 53);
+            txtDatePublished.TabIndex = 25;
+            txtDatePublished.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // txtDateArchived
+            // 
+            txtDateArchived.AutoSize = true;
+            txtDateArchived.BackColor = SystemColors.ButtonHighlight;
+            txtDateArchived.BorderStyle = BorderStyle.Fixed3D;
+            txtDateArchived.Dock = DockStyle.Fill;
+            txtDateArchived.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDateArchived.Location = new Point(309, 318);
+            txtDateArchived.Name = "txtDateArchived";
+            txtDateArchived.Size = new Size(301, 53);
+            txtDateArchived.TabIndex = 26;
+            txtDateArchived.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // frmRecipe
             // 
@@ -302,9 +308,9 @@
         private TextBox txtRecipeName;
         private TextBox txtCaloriesPerServing;
         private TextBox txtDateDrafted;
-        private TextBox txtDatePublished;
-        private TextBox txtDateArchived;
         private ComboBox lstUserName;
         private ComboBox lstCuisineType;
+        private Label txtDatePublished;
+        private Label txtDateArchived;
     }
 }
