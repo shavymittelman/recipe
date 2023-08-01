@@ -1,5 +1,6 @@
 using System.Data;
 
+
 namespace RecipeTest
 {
     public class Tests
@@ -59,6 +60,24 @@ namespace RecipeTest
         }
 
         [Test]
+        public void ChangeExistingToInvalidCloriesPerServing()
+        {
+            int recipeid = GetExistingRecipeId();
+            int caloriesperserving = 0;
+            Assume.That(recipeid > 0, "No recipes in DB, can't run test");
+            caloriesperserving = SQLUtility.GetFirstColumnFirstRowValue("select caloriesperserving from recipe where recipeid = " + recipeid);
+            TestContext.WriteLine("caloriesperserving for recipeid " + recipeid + " is " + caloriesperserving);
+            caloriesperserving = 0;
+            TestContext.WriteLine("change caloriesperserving to " + caloriesperserving);
+
+            DataTable dt = Recipe.Load(recipeid);
+            dt.Rows[0]["caloriesperserving"] = caloriesperserving;
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Save(dt));
+            TestContext.WriteLine(ex.Message);
+        }
+
+
+        [Test]
         public void DeleteRecipe()
         {
             DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, r.recipename from Recipe r left join RecipeIngredient ri on r.RecipeId = ri.RecipeId where ri.RecipeIngredientId is null ");
@@ -77,6 +96,41 @@ namespace RecipeTest
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "Record with recipeid " + recipeid + " exists in DB");
             TestContext.WriteLine("Record with recipeid " + recipeid + " does not exist in DB");
         }
+
+        [Test]
+        public void ChangeExistingRecipeToInvalidRecipeName()
+        {
+            int recipeid = GetExistingRecipeId();
+
+            Assume.That(recipeid > 0, "No recipes in DB, can't run test");
+            string recipename = GetFirstColumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid <> " + recipeid);
+            string currentrecipename = GetFirstColumnFirstRowValueAsString("select top 1 recipename from recipe where recipeid = " + recipeid);
+            Assume.That(recipename != null, "cannot run test because there's no other recipes in table.");
+            TestContext.WriteLine("Change recipeid " + recipeid + " from " + currentrecipename + " to " + recipename + " which belongs to a diff recipe");
+            DataTable dt = Recipe.Load(recipeid);
+            dt.Rows[0]["recipename"] = recipename;
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Save(dt));
+            TestContext.WriteLine(ex.Message);
+        }
+
+        [Test]
+        public void DeleteRecipeWithIngrdient()
+        {
+            DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, r.recipename from Recipe r join RecipeIngredient ri on r.RecipeId = ri.RecipeId ");
+            int recipeid = 0;
+            string recipedesc = "";
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+                recipedesc = "recipe name " + dt.Rows[0]["recipename"];
+            }
+            Assume.That(recipeid > 0, "No recipes with recipe ingredients in DB, can't run test");
+            TestContext.WriteLine("Existing recipe with recipe ingredient,  with id = " + recipeid + ", " + recipedesc);
+            TestContext.WriteLine("Ensure that app cannot delete " + recipeid);
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+            TestContext.WriteLine(ex.Message);
+        }
+
 
         [Test]
         public void LoadRecipe()
@@ -127,6 +181,22 @@ namespace RecipeTest
             return SQLUtility.GetFirstColumnFirstRowValue("select top 1 recipeid from recipe");
         }
 
+        private string GetFirstColumnFirstRowValueAsString(string sql)
+        {
+            string s = "";
+
+            DataTable dt = SQLUtility.GetDataTable(sql);
+           
+            if (dt.Rows.Count > 0 && dt.Columns.Count > 0)
+            {
+                if (dt.Rows[0][0] != DBNull.Value)
+                {
+                   s = dt.Rows[0][0].ToString();
+                }
+            }
+
+            return s;
+        }
 
     }
 }
