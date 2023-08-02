@@ -114,9 +114,26 @@ namespace RecipeTest
         }
 
         [Test]
-        public void DeleteRecipeWithIngrdient()
+        public void DeleteRecipedInDraftOrArchivedOverThirtyDaysWithIngrdient()
         {
-            DataTable dt = SQLUtility.GetDataTable("select top 1 r.recipeid, r.recipename from Recipe r join RecipeIngredient ri on r.RecipeId = ri.RecipeId ");
+            string sql = @"select top 1 r.RecipeId, r.RecipeName
+from Recipe r
+left join RecipeIngredient ri
+on ri.RecipeId = r.RecipeId
+left join Directions d 
+on d.RecipeId = r.RecipeId
+left join CookBookRecipe cr
+on cr.RecipeId = r.RecipeId
+left join MealCourseRecipe mcr
+on mcr.RecipeId = r.RecipeId
+where cr.CookBookRecipeId is null 
+and mcr.MealCourseRecipeId is null
+and (
+    datediff(day, r.DateArchived, CURRENT_TIMESTAMP) <= 30
+    or r.RecipeStatus = 'published'
+)
+";
+            DataTable dt = SQLUtility.GetDataTable(sql);
             int recipeid = 0;
             string recipedesc = "";
             if (dt.Rows.Count > 0)
@@ -124,8 +141,8 @@ namespace RecipeTest
                 recipeid = (int)dt.Rows[0]["recipeid"];
                 recipedesc = "recipe name " + dt.Rows[0]["recipename"];
             }
-            Assume.That(recipeid > 0, "No recipes with recipe ingredients in DB, can't run test");
-            TestContext.WriteLine("Existing recipe with recipe ingredient,  with id = " + recipeid + ", " + recipedesc);
+            Assume.That(recipeid > 0, "No recipes not in draft or archived for less than 30 days with recipe ingredients in DB, can't run test");
+            TestContext.WriteLine("Existing recipe not in draft or archived for less than 30 days with recipe ingredient,  with id = " + recipeid + ", " + recipedesc);
             TestContext.WriteLine("Ensure that app cannot delete " + recipeid);
             Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
             TestContext.WriteLine(ex.Message);
