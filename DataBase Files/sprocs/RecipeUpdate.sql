@@ -4,24 +4,13 @@ create or alter proc dbo.RecipeUpdate(
 	@CuisineId int ,
 	@RecipeName varchar (100),
 	@CaloriesPerServing int ,
-	--@DateDrafted datetime ,
-	--@DatePublished datetime ,
-	--@DateArchived datetime ,
-	--@RecipeStatus varchar (9),
-	--@RecipePicture varchar (8000),
 	@Message varchar(500) = '' output
 )
 as 
 begin
 	declare @return int = 0
 
-	select @RecipeId = isnull(@RecipeId,0)--, @TermEnd = nullif(@TermEnd,0)
-
-	--if @TermEnd is null  and exists(select * from President p where p.TermEnd is null and p.PresidentId <> @PresidentId)
-	--begin
-	--	select @return = 1, @Message = 'There can only be one prez at a time'
-	--	goto finished
-	--end
+	select @RecipeId = isnull(@RecipeId,0)
 
 	if @RecipeId = 0
 	begin 
@@ -38,11 +27,6 @@ begin
 		CuisineId = @CuisineId, 
 		RecipeName = @RecipeName, 
 		CaloriesPerServing = @CaloriesPerServing
-		--DateDrafted = @DateDrafted, 
-		--DatePublished = @DatePublished, 
-		--DateArchived = @DateArchived, 
-		--RecipeStatus = @RecipeStatus, 
-		--RecipePicture = @RecipePicture
 		where RecipeId = @RecipeId
 	end
 	finished:
