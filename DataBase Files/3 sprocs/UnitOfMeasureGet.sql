@@ -1,0 +1,24 @@
+create or alter procedure dbo.UnitOfMeasureGet(
+	@UnitOfMeasureId int = 0,
+	@All bit = 0,
+	@IncludeBlank bit = 0,
+	@Message varchar(500) = ''  output
+)
+as
+begin
+	declare @return int = 0
+
+	select @All = isnull(@All,0), @UnitOfMeasureId = isnull(@UnitOfMeasureId,0), @IncludeBlank = isnull(@IncludeBlank, 0)
+
+	select u.UnitOfMeasureId, u.UnitOfMeasureDesc
+	from UnitOfMeasure u
+	where u.UnitOfMeasureId = @UnitOfMeasureId
+	or @All = 1
+	union select 0, ''
+	where @IncludeBlank = 1
+	order by u.UnitOfMeasureId
+	
+	return @return
+end
+go
+exec UnitOfMeasureGet @IncludeBlank = 1, @All = 1

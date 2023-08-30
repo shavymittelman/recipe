@@ -1,4 +1,4 @@
-create or alter function dbo.CaloriesPerMealTotal(@MealId int)
+create or alter function dbo.TotalCaloriesPerMeal(@MealId int)
 returns int 
 as
 begin
@@ -6,11 +6,11 @@ begin
 	
 	select @value = sum(r.CaloriesPerServing)
 	from Recipe r
-	left join MealCourseRecipe mcr
+	join MealCourseRecipe mcr
 	on mcr.RecipeId = r.RecipeId
-	left join MealCourse mc 
+	join MealCourse mc 
 	on mc.MealCourseId = mcr.MealCourseId
-	left join Meal m 
+	join Meal m 
 	on m.MealId = mc.MealId
 	where m.MealId = @MealId
 	group by m.MealName
@@ -19,5 +19,5 @@ begin
 end
 go
 
-select caloriestotal = dbo.CaloriesPerMealTotal(m.MealId), m.MealName
+select caloriestotal = dbo.TotalCaloriesPerMeal(m.MealId), m.MealName
 from Meal m

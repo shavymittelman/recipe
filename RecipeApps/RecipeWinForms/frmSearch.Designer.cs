@@ -31,9 +31,9 @@
             tblMain = new TableLayoutPanel();
             gRecipe = new DataGridView();
             btnSearch = new Button();
-            txtSearch = new TextBox();
             lblRecipeName = new Label();
             btnNew = new Button();
+            txtSearch = new TextBox();
             tblMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gRecipe).BeginInit();
             SuspendLayout();
@@ -47,9 +47,9 @@
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.0769234F));
             tblMain.Controls.Add(gRecipe, 0, 1);
             tblMain.Controls.Add(btnSearch, 2, 0);
-            tblMain.Controls.Add(txtSearch, 1, 0);
             tblMain.Controls.Add(lblRecipeName, 0, 0);
             tblMain.Controls.Add(btnNew, 3, 0);
+            tblMain.Controls.Add(txtSearch, 1, 0);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Name = "tblMain";
@@ -69,6 +69,7 @@
             gRecipe.Name = "gRecipe";
             gRecipe.RowTemplate.Height = 25;
             gRecipe.Size = new Size(750, 447);
+            gRecipe.StandardTab = true;
             gRecipe.TabIndex = 2;
             // 
             // btnSearch
@@ -82,16 +83,6 @@
             btnSearch.TabIndex = 1;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = false;
-            // 
-            // txtSearch
-            // 
-            txtSearch.BorderStyle = BorderStyle.FixedSingle;
-            txtSearch.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtSearch.Location = new Point(206, 3);
-            txtSearch.Multiline = true;
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(197, 64);
-            txtSearch.TabIndex = 0;
             // 
             // lblRecipeName
             // 
@@ -117,6 +108,17 @@
             btnNew.TabIndex = 4;
             btnNew.Text = "New";
             btnNew.UseVisualStyleBackColor = false;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtSearch.BorderStyle = BorderStyle.FixedSingle;
+            txtSearch.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            txtSearch.Location = new Point(206, 10);
+            txtSearch.Margin = new Padding(3, 10, 3, 3);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(197, 31);
+            txtSearch.TabIndex = 0;
             // 
             // frmSearch
             // 

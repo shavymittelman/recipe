@@ -73,15 +73,15 @@ create table dbo.Recipe(
     RecipeStatus as
             case
                 when DatePublished is null and DateArchived is null then 'Draft'
-                when DatePublished is not null and datearchived is null then 'published'
+                when DatePublished is not null and datearchived is null then 'Published'
                 else 'Archived'
             end persisted, 
     RecipePicture as concat('Recipe-', replace(RecipeName, ' ', '-'), '.jpg') persisted, 
 -- SM Allow same day changes for all dates.
-    constraint ck_Recipe_date_drafted_is_earlier_than_date_published_and_date_archived 
-        check (DateDrafted < DatePublished and DateDrafted < DateArchived),
-    constraint ck_Recipe_date_published_is_earlier_than_date_archived 
-        check (DatePublished < DateArchived)
+    constraint ck_Recipe_date_drafted_must_be_earlier_than_date_published_and_date_archived 
+        check (DateDrafted <= DatePublished and DateDrafted <= DateArchived),
+    constraint ck_Recipe_date_published_must_be_earlier_than_date_archived 
+        check (DatePublished <= DateArchived)
 )
 go 
 
