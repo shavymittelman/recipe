@@ -11,7 +11,8 @@ namespace RecipeWinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=true");
+            //delete line below
+            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;", true, "recipeadmin", "TYHforeverything!");
             Application.Run(new frmMain());
         }
     }

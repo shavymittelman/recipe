@@ -92,6 +92,19 @@
             }
         }
 
+        private void FrmMain_Shown(object? sender, EventArgs e)
+        {
+            frmLogin f = new frmLogin() { StartPosition = FormStartPosition.CenterParent };
+            bool b = f.ShowLogin();
+            if (b == false)
+            {
+                this.Close();
+                Application.Exit();
+                return;
+            }
+            OpenForm(typeof(frmDashboard));
+        }
+
         private void Newfrm_TextChanged(object? sender, EventArgs e)
         {
             WindowsFormsUtility.SetupNav(tsMain);
@@ -137,10 +150,7 @@
             OpenForm(typeof(frmMealList));
         }
 
-        private void FrmMain_Shown(object? sender, EventArgs e)
-        {
-            OpenForm(typeof(frmDashboard));
-        }
+        
 
         private void MnuFileDashboard_Click(object? sender, EventArgs e)
         {
