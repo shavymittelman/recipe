@@ -37,7 +37,18 @@ end
 go
 
 
+use HeartyHearthDB
+go
+exec RecipeIngredientUpdate
+@RecipeIngredientId = null,
+@RecipeId = 8,
+@IngredientId = 3,
+@UnitOfMeasureId = 2,
+@Amount = 4,
+@IngredientNum = 1,
+@Message = null
 
+select * from RecipeIngredient
 
 
 

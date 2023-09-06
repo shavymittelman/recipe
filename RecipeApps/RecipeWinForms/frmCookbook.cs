@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using RecipeSystem;
+using System.Data;
 
 namespace RecipeWinForms
 {
@@ -70,6 +71,7 @@ namespace RecipeWinForms
                 bindingsource.ResetBindings(false);
                 WindowsFormsUtility.DisableAndEnableButtons(lstmanagebuttons, b);
                 this.Tag = SQLUtility.GetValueFromFirstRowAsInt(dtcookbook, "CookbookId");
+                cookbookid = (int)this.Tag;
                 this.Text = GetCookbookRecipeDesc();
             }
             catch (Exception ex)
@@ -94,7 +96,13 @@ namespace RecipeWinForms
             Application.UseWaitCursor = true;
             try
             {
-                Cookbook.Delete(dtcookbook);
+                Cookbook.Delete(dtcookbook);                
+                if (this.MdiParent != null && this.MdiParent is frmMain)
+                {
+                    frmCookbookList f = (frmCookbookList)Application.OpenForms["frmCookbookList"];
+                    f.Close();
+                    ((frmMain)this.MdiParent).OpenForm(typeof(frmCookbookList));                    
+                }
                 this.Close();
             }
             catch (Exception ex)
@@ -142,7 +150,7 @@ namespace RecipeWinForms
 
         private string GetCookbookRecipeDesc()
         {
-            string value = "New Recipe";
+            string value = "New Cookbook";
             int pkvalue = SQLUtility.GetValueFromFirstRowAsInt(dtcookbook, "CookbookId");
             if (pkvalue > 0)
             {

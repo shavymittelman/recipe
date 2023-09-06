@@ -11,7 +11,7 @@
             BindData();
         }
         
-        private void BindData()
+        public void BindData()
         {
             gRecipe.DataSource = Recipe.GetAllRowsFromTable("RecipeGet");
             WindowsFormsUtility.FormatGridForSearchResults(gRecipe, "Recipe");

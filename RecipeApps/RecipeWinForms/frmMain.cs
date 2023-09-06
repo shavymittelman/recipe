@@ -15,10 +15,11 @@
             mnuFileDashboard.Click += MnuFileDashboard_Click;
             mnuCloneRecipe.Click += MnuCloneRecipe_Click;
             mnuCookbookAutoCreate.Click += MnuCookbookAutoCreate_Click;
+            mnuCookbookNew.Click += MnuCookbookNew_Click;
             this.Shown += FrmMain_Shown;
         }
 
-       
+        
 
         public void OpenForm(Type frmtype, int pkvalue = 0)
         {
@@ -35,6 +36,7 @@
                 else if (frmtype == typeof(frmRecipeList))
                 {
                     frmRecipeList f = new frmRecipeList();
+                    f.BindData();
                     newfrm = f;
                 }
                 else if (frmtype == typeof(frmCookbook))
@@ -46,6 +48,7 @@
                 else if (frmtype == typeof(frmCookbookList))
                 {
                     frmCookbookList f = new frmCookbookList();
+                    f.BindData();
                     newfrm = f;
                 }
                 else if (frmtype == typeof(frmMealList))
@@ -138,6 +141,11 @@
         private void MnuDataMaintenanceEdit_Click(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmDataMaintenance));
+        }
+
+        private void MnuCookbookNew_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmCookbook));
         }
 
         private void MnuCookbookList_Click(object? sender, EventArgs e)

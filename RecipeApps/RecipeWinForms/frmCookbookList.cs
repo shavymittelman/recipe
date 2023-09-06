@@ -11,7 +11,7 @@
             gCookbook.CellDoubleClick += GCookbook_CellDoubleClick;
         }
 
-        private void BindData()
+        public void BindData()
         {
             gCookbook.DataSource = Recipe.GetAllRowsFromTable("CookbookGet");
             WindowsFormsUtility.FormatGridForSearchResults(gCookbook, "Cookbook");

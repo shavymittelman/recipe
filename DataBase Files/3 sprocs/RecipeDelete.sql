@@ -22,6 +22,8 @@ begin
 
 	begin try
 		begin tran
+		delete CookBookRecipe where RecipeId = @RecipeId
+		delete MealCourseRecipe where RecipeId = @RecipeId
 		delete RecipeIngredient where RecipeId = @RecipeId
 		delete Directions where RecipeId = @RecipeId
 		delete Recipe where RecipeId = @RecipeId
@@ -36,3 +38,10 @@ begin
 	return @return
 end
 go
+
+
+--use HeartyHearthDB
+--go
+--exec RecipeDelete
+--@RecipeId = 7,
+--@Message = null

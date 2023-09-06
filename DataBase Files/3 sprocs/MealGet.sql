@@ -7,7 +7,7 @@ as
 begin
 	declare @return int = 0
 
-	select @All = isnull(@All,0), @MealId = isnull(@MealId,0), @IncludeBlank = isnull(@IncludeBlank, 0)
+	select @All = isnull(@All,0), @MealId = isnull(@MealId,0)
 
 	select m.MealName, 
 		u.UserName, 

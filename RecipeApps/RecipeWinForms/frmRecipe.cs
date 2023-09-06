@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using RecipeSystem;
+using System.Data;
 
 namespace RecipeWinForms
 {
@@ -71,6 +72,7 @@ namespace RecipeWinForms
             WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("UnitOfMeasure"), "UnitOfMeasure", "UnitOfMeasureDesc");
             WindowsFormsUtility.AddDeleteButtonToGrid(gIngredients, deletecolumnname);
             WindowsFormsUtility.FormatGridForEdit(gIngredients, "RecipeIngredient");
+            //AdjustColumnOrder();
         }
 
         private bool Save()
@@ -85,6 +87,7 @@ namespace RecipeWinForms
                 bindingsource.ResetBindings(false);
                 WindowsFormsUtility.DisableAndEnableButtons(lstmanagebuttons, b);
                 this.Tag = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
+                recipeid = (int)this.Tag;
                 this.Text = GetRecipeDesc();
             }
             catch (Exception ex)
@@ -111,6 +114,12 @@ namespace RecipeWinForms
             try
             {
                 Recipe.Delete(dtrecipe);
+                if (this.MdiParent != null && this.MdiParent is frmMain)
+                {
+                    frmRecipeList f = (frmRecipeList)Application.OpenForms["frmRecipeList"];
+                    f.Close();
+                    ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipeList));
+                }
                 this.Close();
             }
             catch (Exception ex)
@@ -208,6 +217,15 @@ namespace RecipeWinForms
                 lblRecipeStatus.Text = "Draft";
             }
         }
+
+        //private void AdjustColumnOrder()
+        //{
+        //    gIngredients.Columns["IngredientId"].DisplayIndex = 0;
+        //    gIngredients.Columns["UnitOfMeasureId"].DisplayIndex = 1;
+        //    gIngredients.Columns["Amount"].DisplayIndex = 2;
+        //    gIngredients.Columns["IngredientNum"].DisplayIndex = 3;
+        //    gIngredients.Columns["deletecol"].DisplayIndex = 4;
+        //}
 
         private string GetRecipeDesc()
         {
