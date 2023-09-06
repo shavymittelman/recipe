@@ -60,6 +60,6 @@ namespace RecipeWinForms
             this.Close();
         }
 
-        
+
     }
 }
