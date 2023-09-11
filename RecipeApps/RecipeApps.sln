@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CPUWindowsFormFramework", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeSystem", "RecipeSystem\RecipeSystem.csproj", "{30E93AF9-46B0-4EC3-A3A3-8894C7AD60D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeTest", "RecipeTest\RecipeTest.csproj", "{4CE58817-2BD4-420F-8C9D-9A823E393813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeTest", "RecipeTest\RecipeTest.csproj", "{4CE58817-2BD4-420F-8C9D-9A823E393813}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeMAUI", "RecipeMAUI\RecipeMAUI.csproj", "{6AA44F70-8F85-44B6-88CE-55570BBF510F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{4CE58817-2BD4-420F-8C9D-9A823E393813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CE58817-2BD4-420F-8C9D-9A823E393813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CE58817-2BD4-420F-8C9D-9A823E393813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AA44F70-8F85-44B6-88CE-55570BBF510F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

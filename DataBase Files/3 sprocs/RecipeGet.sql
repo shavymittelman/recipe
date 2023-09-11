@@ -2,7 +2,7 @@ create or alter procedure dbo.RecipeGet(@RecipeId int = 0, @RecipeName varchar(1
 as 
 begin
 	select @RecipeName = nullif(@RecipeName, '')
-	select r.RecipeId, r.UserRefId, r.CuisineId, r.RecipeName, r.RecipeStatus, u.UserName, r.CaloriesPerServing
+	select r.RecipeId, r.UserRefId, r.CuisineId, r.RecipeName, r.RecipeStatus, u.UserName, r.CaloriesPerServing, r.RecipePicture
 	, r.DateDrafted, r.DatePublished, r.DateArchived
 	, NumIngredients = dbo.NumIngredientsPerRecipe(r.RecipeId)
 	, ListOrder = 1
@@ -12,7 +12,7 @@ begin
 	where r.RecipeId = @RecipeId	
 	or r.RecipeName like '%' + @RecipeName + '%'
 	or @All = 1
-	union select 0, 0, 0, '', '', '', 0, '', '', '', 0, 0
+	union select 0, 0, 0, '', '', '', 0, '', '', '', '', 0, 0
 	where @IncludeBlank = 1
 	order by ListOrder, r.RecipeStatus desc, r.RecipeId 
 end
