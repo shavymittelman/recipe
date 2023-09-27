@@ -8,7 +8,7 @@ namespace RecipeTest
         [SetUp]
         public void Setup()
         {
-            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=true");
+            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=true", true);
         }
 
         [Test]
@@ -33,7 +33,8 @@ namespace RecipeTest
             r["CaloriesPerServing"] = caloriesperserving;            
             r["DateDrafted"] = datedrafted;
             
-            Recipe.Save(dt);
+            bizRecipe recipe = new bizRecipe();
+            recipe.Save(dt);
 
             int newid = SQLUtility.GetFirstColumnFirstRowValue("select * from recipe where recipename = '" + recipenamedatetime + "'");
             Assert.IsTrue(newid > 0, "president with recipename = " + recipenamedatetime + " is not found in DB");
@@ -91,7 +92,10 @@ namespace RecipeTest
             Assume.That(recipeid > 0, "No recipes without recipe ingredients in DB, can't run test");
             TestContext.WriteLine("Existing recipe without recipe ingredient,  with id = " + recipeid + ", " + recipedesc);
             TestContext.WriteLine("Ensure that app can delete " + recipeid);
-            Recipe.Delete(dt);
+
+            bizRecipe recipe = new();
+            recipe.Delete(dt);
+
             DataTable dtafterdelete = SQLUtility.GetDataTable("select * from recipe where recipeid = " + recipeid);
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "Record with recipeid " + recipeid + " exists in DB");
             TestContext.WriteLine("Record with recipeid " + recipeid + " does not exist in DB");
@@ -156,7 +160,10 @@ and (
             Assume.That(recipeid > 0, "No recipes in DB, can't run test");
             TestContext.WriteLine("existing recipe with id = " + recipeid);
             TestContext.WriteLine("Ensure that app loads recipe " + recipeid);
-            DataTable dt = Recipe.Load(recipeid);
+
+            bizRecipe recipe = new();
+            DataTable dt = recipe.Load(recipeid);
+
             int loadedid = (int)dt.Rows[0]["recipeid"];
             Assert.IsTrue(loadedid == recipeid, (int)dt.Rows[0]["recipeid"] + " <> " + recipeid);
             TestContext.WriteLine("Loaded recipe (" + loadedid + ")");
