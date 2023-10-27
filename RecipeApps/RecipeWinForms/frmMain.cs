@@ -158,8 +158,6 @@
             OpenForm(typeof(frmMealList));
         }
 
-        
-
         private void MnuFileDashboard_Click(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmDashboard));

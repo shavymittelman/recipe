@@ -16,8 +16,6 @@ namespace RecipeWinForms
 
         }
 
-
-
         private void SearchRecipe()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -87,6 +85,5 @@ namespace RecipeWinForms
                 e.SuppressKeyPress = true;
             }
         }
-
     }
 }

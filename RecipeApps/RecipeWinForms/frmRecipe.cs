@@ -72,7 +72,6 @@ namespace RecipeWinForms
             WindowsFormsUtility.AddComboBoxToGrid(gIngredients, DataMaintenance.GetDataList("UnitOfMeasure"), "UnitOfMeasure", "UnitOfMeasureDesc");
             WindowsFormsUtility.AddDeleteButtonToGrid(gIngredients, deletecolumnname);
             WindowsFormsUtility.FormatGridForEdit(gIngredients, "RecipeIngredient");
-            //AdjustColumnOrder();
         }
 
         private bool Save()
@@ -217,15 +216,6 @@ namespace RecipeWinForms
                 lblRecipeStatus.Text = "Draft";
             }
         }
-
-        //private void AdjustColumnOrder()
-        //{
-        //    gIngredients.Columns["IngredientId"].DisplayIndex = 0;
-        //    gIngredients.Columns["UnitOfMeasureId"].DisplayIndex = 1;
-        //    gIngredients.Columns["Amount"].DisplayIndex = 2;
-        //    gIngredients.Columns["IngredientNum"].DisplayIndex = 3;
-        //    gIngredients.Columns["deletecol"].DisplayIndex = 4;
-        //}
 
         private string GetRecipeDesc()
         {
